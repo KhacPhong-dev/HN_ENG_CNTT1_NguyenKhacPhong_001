@@ -1,12 +1,3 @@
-// Bài 2:
-// Viết chương trình mô phỏng quá trình soạn thảo văn bản. Người dùng có thể thực hiện chương trình với các chức năng cơ bản sau:
-// ——————————— TEXT EDITOR ———————————
-// INSERT x: thêm ký tự x vào cuối văn bản
-// UNDO: hoàn tác thao tác gần nhất (xóa ký tự cuối)
-// REDO: phục hồi thao tác vừa undo
-// HIỂN THỊ: in văn bản hiện tại
-// THOÁT: kết thúc chương trình
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
