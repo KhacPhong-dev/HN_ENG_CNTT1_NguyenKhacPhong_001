@@ -108,7 +108,7 @@ void markTask(TaskList** taskList, HistoryList** historyList, int id) {
     } else {
         prev->next = current->next;
     }
-    free(current);
+    
 }
 
 void sortTask(TaskList **head) {
