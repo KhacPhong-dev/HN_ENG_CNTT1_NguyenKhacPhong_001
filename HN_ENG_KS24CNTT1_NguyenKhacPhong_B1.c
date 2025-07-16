@@ -78,29 +78,38 @@ void updateTask(TaskList** head, int id, char title[100], int priority, char dea
 
 
 }
-void markTask(HistoryList** head, Task task,int id) {
-    HistoryList* newHistory = (HistoryList*) malloc(sizeof(HistoryList));
-    newHistory->task = task;
-    newHistory->next = *head;
-    if (*head !=NULL) {
-        (*head)->prev = newHistory;
-    }
-    TaskList* current = *head;
-    while (current !=NULL && current->task.id!= id) {
+void markTask(TaskList** taskList, HistoryList** historyList, int id) {
+    TaskList* current = *taskList;
+    TaskList* prev = NULL;
+
+    while (current != NULL && current->task.id != id) {
+        prev = current;
         current = current->next;
-
-
     }
+
     if (current == NULL) {
         printf("Task not found\n");
-
-    }
-    else {
-        deleteTask(&current, task.id);
+        return;
     }
 
+
+    HistoryList* newHistory = (HistoryList*)malloc(sizeof(HistoryList));
+    newHistory->task = current->task;
+    newHistory->next = *historyList;
+    newHistory->prev = NULL;
+    if (*historyList != NULL) {
+        (*historyList)->prev = newHistory;
+    }
+    *historyList = newHistory;
+
+  
+    if (prev == NULL) {
+        *taskList = current->next;
+    } else {
+        prev->next = current->next;
+    }
+    free(current);
 }
-
 
 void sortTask(TaskList **head) {
     TaskList *current = *head;
@@ -191,10 +200,7 @@ int main() {
                 int id;
                 printf("Nhap ID cua nhiem vu can danh dau hoan thanh: ");
                 scanf("%d", &id);
-                Task task;
-                task.id = id;
-                markTask(&historyList, task, id);
-
+                markTask(&taskList, &historyList, id);
                 break;
             }case 6: {
                 sortTask(&taskList);
